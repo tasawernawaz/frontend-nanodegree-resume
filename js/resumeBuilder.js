@@ -18,7 +18,7 @@ var work = {
         'title': "Software Engineer",
         'employer': "Arbisoft",
         'dates': "2012-2015",
-        'location': "Lahore",
+        'location': "Lahore, Pakistan",
         'description': 'Currently I am software engineer at arbisot since december 2012 working on python, scrapy, djnago and rest api'
     }]
 };
@@ -29,7 +29,7 @@ var education = {
             'name': 'University of Gujrat',
             'degree': 'BS CS',
             'dates': "2008-2012",
-            'location': 'Gujrat',
+            'location': 'Gujrat, Pakistan',
             'major': ['Computer Science'],
             'url': 'www.uog.edu.pk/'
         },
@@ -37,7 +37,7 @@ var education = {
             'name': 'F.G Degree Collage Kharian Cant',
             'degree': 'ICS',
             'dates': "2006-2008",
-            'location': 'Kharian',
+            'location': 'Gujrat, Pakistan',
             'major': ['Computer Science', 'Physics', 'Math'],
             'url': 'https://www.facebook.com/fg.degree.college'
         }
@@ -55,6 +55,12 @@ var education = {
 var projects = {
     'projects': [
         {
+            'title': 'kyruus',
+            'description': 'data collection of doctors from state boards and hospitals websites',
+            'dates': "2012-2012",
+            'images': ['images/kyruus.png']
+        },
+        {
             'title': 'aee',
             'description': 'mostly work done ia related to python-scrapy',
             'dates': "2012-2014",
@@ -64,33 +70,57 @@ var projects = {
 };
 
 
-//
-//var header = $("#header");
-//var myName = HTMLheaderName.replace("%data%", bio.Name);
-//var myRole = HTMLheaderRole.replace("%data%", bio.Role);
-//header.prepend(myRole);
-//header.prepend(myName);
+var header = $("#header");
+var myName = HTMLheaderName.replace("%data%", bio.Name);
+var myRole = HTMLheaderRole.replace("%data%", bio.Role);
+header.prepend(myRole);
+header.prepend(myName);
 
-//    header.append(HTMLbioPic.replace("%data%", bio.Image_url));
-//    header.append(HTMLWelcomeMsg.replace("%data%", bio.Welcome_message));
-
-//var contact = $("#topContacts");
-//contact.append(HTMLmobile.replace("%data%", bio.Contact_Info.Phone));
-//contact.append(HTMLemail.replace("%data%", bio.Contact_Info.Email));
-//contact.append(HTMLgithub.replace("%data%", bio.Contact_Info.Github));
-//contact.append(HTMLlocation.replace("%data%", bio.Contact_Info.Location));
+header.append(HTMLbioPic.replace("%data%", bio.Image_url));
+header.append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
 
 
-//    var skills =HTMLskills;
-//    skills.append(HTMLskills.replace("%data%", skills[0]));
+var contact = $("#topContacts");
+contact.append(HTMLmobile.replace("%data%", bio.contacts.Phone));
+contact.append(HTMLemail.replace("%data%", bio.contacts.Emailmail));
+contact.append(HTMLgithub.replace("%data%", bio.contacts.Github));
+contact.append(HTMLlocation.replace("%data%", bio.contacts.Location));
 
-//$("#workExperience").append(HTMLworkStart);
-//var work_div = $(".work-entry");
-//work_div.append(HTMLworkTitle.replace("%data%", work.current_position));
-//work_div.append(HTMLworkEmployer.replace("%data%", work.employer));
-//work_div.append(HTMLworkDates.replace("%data%", work.years_worked));
-//work_div.append(HTMLworkLocation.replace("%data%", work.city));
 
+if (bio.Skills.length !== 0) {
+    header.append(HTMLskillsStart);
+    var skills = $("#skills");
+    for (var i = 0; i < bio.Skills.length; i++) {
+        skills.append(HTMLskills.replace("%data%", bio.Skills[i]));
+    }
+}
+
+displayWork();
+
+function displayWork() {
+    for (var index in work.jobs) {
+        $("#workExperience").append(HTMLworkStart);
+        var work_div = $(".work-entry:last");
+        var employer_title = HTMLworkEmployer.replace("%data%", work.jobs[index].employer) + HTMLworkTitle.replace("%data%", work.jobs[index].title);
+        work_div.append(employer_title);
+        work_div.append(HTMLworkDates.replace("%data%", work.jobs[index].dates));
+        work_div.append(HTMLworkLocation.replace("%data%", work.jobs[index].location));
+        work_div.append(HTMLworkDescription.replace("%data%", work.jobs[index].description));
+    }
+}
+
+projects.display = function () {
+    for (var index in projects.projects){
+        $("#projects").append(HTMLprojectStart);
+        var project_div = $(".project-entry:last");
+        project_div.append(HTMLprojectTitle.replace("%data%", projects.projects[index].title));
+        project_div.append(HTMLprojectDates.replace("%data%", projects.projects[index].dates));
+        project_div.append(HTMLprojectDescription.replace("%data%", projects.projects[index].description));
+        project_div.append(HTMLprojectImage.replace("%data%", projects.projects[index].images));
+    }
+};
+
+projects.display();
 
 //
 //$("#education").append(HTMLschoolStart);
@@ -99,9 +129,3 @@ var projects = {
 //edu_div.append(HTMLschoolDates.replace("%data%", education.year));
 //edu_div.append(HTMLschoolLocation.replace("%data%", education.city));
 
-//
-//        var work_div = $("#workExperience");
-//    work_div.append(HTMLworkTitle.replace("%data%", work.current_position));
-//    work_div.append(HTMLworkEmployer.replace("%data%", work.employer));
-//    work_div.append(HTMLworkDates.replace("%data%", work.years_worked));
-//    work_div.append(HTMLworkLocation.replace("%data%", work.city));

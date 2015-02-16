@@ -1,126 +1,185 @@
 var bio = {
-    'Name': "Tasawer Nawaz",
-    'Role': "Web Developer",
+    'name': "Tasawer Nawaz",
+    'role': "Web Developer",
     'contacts': {
-        "Phone": "03337214307",
-        "Email": "tasawernawaz@gmail.com",
-        "Github": "tasawernawaz",
-        'Location': "Lahore, Pakistan"
+        "mobile": "03337214307",
+        "email": "tasawernawaz@gmail.com",
+        "github": "tasawernawaz",
+        "twitter": "@tasawernawaz",
+        'location': "Lahore, Pakistan"
     },
-
-    'Image_url': "images/fry.jpg",
     'welcomeMessage': 'Welcome to my resume',
-    'Skills': ['Python', 'Scrapy', 'Javascript', 'CSS']
+    'biopic': "images/fry.jpg",
+    'skills': ['Python', 'Scrapy', 'Javascript', 'CSS'],
+    'display': function () {
+        var header = $("#header");
+        header.prepend(HTMLheaderRole.replace("%data%", bio.role));
+        header.prepend(HTMLheaderName.replace("%data%", bio.name));
+        header.append(HTMLbioPic.replace("%data%", bio.biopic));
+        header.append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
+
+
+        var contact = $("#topContacts");
+        contact.append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+        contact.append(HTMLemail.replace("%data%", bio.contacts.email));
+        contact.append(HTMLgithub.replace("%data%", bio.contacts.github));
+        contact.append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+        contact.append(HTMLlocation.replace("%data%", bio.contacts.location));
+
+        if (bio.skills.length !== 0) {
+            header.append(HTMLskillsStart);
+            var skills = $("#skills");
+            for (var i = 0; i < bio.skills.length; i++) {
+                skills.append(HTMLskills.replace("%data%", bio.skills[i]));
+            }
+        }
+    }
 };
+
 
 var work = {
     'jobs': [{
-        'title': "Software Engineer",
         'employer': "Arbisoft",
-        'dates': "2012-2015",
+        'title': "Software Engineer",
         'location': "Lahore, Pakistan",
+        'dates': "Dec, 2012 - Jan, 2015",
         'description': 'Currently I am software engineer at arbisot since december 2012 working on python, scrapy, djnago and rest api'
-    }]
+    }],
+    'display': function () {
+        for (var index in work.jobs) {
+            $("#workExperience").append(HTMLworkStart);
+            var work_div = $(".work-entry:last");
+            var employer_title = HTMLworkEmployer.replace("%data%", work.jobs[index].employer) + HTMLworkTitle.replace("%data%", work.jobs[index].title);
+            work_div.append(employer_title);
+            work_div.append(HTMLworkDates.replace("%data%", work.jobs[index].dates));
+            work_div.append(HTMLworkLocation.replace("%data%", work.jobs[index].location));
+            work_div.append(HTMLworkDescription.replace("%data%", work.jobs[index].description));
+        }
+    }
 };
 
 var education = {
     'schools': [
         {
             'name': 'University of Gujrat',
-            'degree': 'BS CS',
-            'dates': "2008-2012",
             'location': 'Gujrat, Pakistan',
+            'degree': 'BS CS',
             'major': ['Computer Science'],
-            'url': 'www.uog.edu.pk/'
+            'dates': 2012
         },
         {
             'name': 'F.G Degree Collage Kharian Cant',
-            'degree': 'ICS',
-            'dates': "2006-2008",
             'location': 'Gujrat, Pakistan',
+            'degree': 'ICS',
             'major': ['Computer Science', 'Physics', 'Math'],
-            'url': 'https://www.facebook.com/fg.degree.college'
+            'dates': 2008
         }
     ],
-    'onlineCourses ': [
+    "onlineCourses": [
         {
             'title': 'Udacity Nanodegree',
             'school': 'Udacity',
-            'dates': "2015 to current",
-            'url': 'udacity.com/course/nd001'
+            'dates': 2015,
+            'url': 'https://udacity.com/course/nd001'
         }
-    ]
+    ],
+    'display': function () {
+        for (var school in education.schools) {
+            $("#education").append(HTMLschoolStart);
+            var edu_div = $(".education-entry:last");
+            var name_degree =HTMLschoolName.replace("%data%", education.schools[school].name) + HTMLschoolDegree.replace("%data%", education.schools[school].degree)
+            edu_div.append(name_degree);
+            edu_div.append(HTMLschoolLocation.replace("%data%", education.schools[school].location));
+            edu_div.append(HTMLschoolMajor.replace("%data%", education.schools[school].major));
+            edu_div.append(HTMLschoolDates.replace("%data%", education.schools[school].dates));
+        }
+        for (var online_school in education.onlineCourses) {
+            $("#education").append(HTMLonlineClasses);
+            var online_edu_div = $(".education-entry:last");
+            var title_school = HTMLonlineTitle.replace("%data%", education.schools[online_school].title) + HTMLonlineSchool.replace("%data%", education.schools[online_school].school)
+            online_edu_div.append(title_school);
+            online_edu_div.append(HTMLonlineDates.replace("%data%", education.schools[online_school].dates));
+            online_edu_div.append(HTMLonlineURL.replace("%data%", education.schools[online_school].url));
+        }
+    }
 };
+
 
 var projects = {
     'projects': [
         {
             'title': 'kyruus',
+            'dates': "Dec, 2012 - May, 2013",
             'description': 'data collection of doctors from state boards and hospitals websites',
-            'dates': "2012-2012",
             'images': ['images/kyruus.png']
         },
         {
             'title': 'aee',
+            'dates': "May, 2013 - Jan 2015",
             'description': 'mostly work done ia related to python-scrapy',
-            'dates': "2012-2014",
             'images': ['images/aee.png']
         }
-    ]
-};
-
-
-var header = $("#header");
-var myName = HTMLheaderName.replace("%data%", bio.Name);
-var myRole = HTMLheaderRole.replace("%data%", bio.Role);
-header.prepend(myRole);
-header.prepend(myName);
-
-header.append(HTMLbioPic.replace("%data%", bio.Image_url));
-header.append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
-
-
-var contact = $("#topContacts");
-contact.append(HTMLmobile.replace("%data%", bio.contacts.Phone));
-contact.append(HTMLemail.replace("%data%", bio.contacts.Emailmail));
-contact.append(HTMLgithub.replace("%data%", bio.contacts.Github));
-contact.append(HTMLlocation.replace("%data%", bio.contacts.Location));
-
-
-if (bio.Skills.length !== 0) {
-    header.append(HTMLskillsStart);
-    var skills = $("#skills");
-    for (var i = 0; i < bio.Skills.length; i++) {
-        skills.append(HTMLskills.replace("%data%", bio.Skills[i]));
-    }
-}
-
-displayWork();
-
-function displayWork() {
-    for (var index in work.jobs) {
-        $("#workExperience").append(HTMLworkStart);
-        var work_div = $(".work-entry:last");
-        var employer_title = HTMLworkEmployer.replace("%data%", work.jobs[index].employer) + HTMLworkTitle.replace("%data%", work.jobs[index].title);
-        work_div.append(employer_title);
-        work_div.append(HTMLworkDates.replace("%data%", work.jobs[index].dates));
-        work_div.append(HTMLworkLocation.replace("%data%", work.jobs[index].location));
-        work_div.append(HTMLworkDescription.replace("%data%", work.jobs[index].description));
-    }
-}
-
-projects.display = function () {
-    for (var index in projects.projects){
-        $("#projects").append(HTMLprojectStart);
-        var project_div = $(".project-entry:last");
-        project_div.append(HTMLprojectTitle.replace("%data%", projects.projects[index].title));
-        project_div.append(HTMLprojectDates.replace("%data%", projects.projects[index].dates));
-        project_div.append(HTMLprojectDescription.replace("%data%", projects.projects[index].description));
-        project_div.append(HTMLprojectImage.replace("%data%", projects.projects[index].images));
+    ],
+    display: function () {
+        projects.display = function () {
+            for (var index in projects.projects) {
+                $("#projects").append(HTMLprojectStart);
+                var project_div = $(".project-entry:last");
+                project_div.append(HTMLprojectTitle.replace("%data%", projects.projects[index].title));
+                project_div.append(HTMLprojectDates.replace("%data%", projects.projects[index].dates));
+                project_div.append(HTMLprojectDescription.replace("%data%", projects.projects[index].description));
+                project_div.append(HTMLprojectImage.replace("%data%", projects.projects[index].images));
+            }
+        }
     }
 };
 
+
+bio.display();
+work.display();
+education.display();
 projects.display();
+
+
+//var header = $("#header");
+//var myName = HTMLheaderName.replace("%data%", bio.Name);
+//var myRole = HTMLheaderRole.replace("%data%", bio.Role);
+//header.prepend(myRole);
+//header.prepend(myName);
+//
+//header.append(HTMLbioPic.replace("%data%", bio.Image_url));
+//header.append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
+//
+//
+//var contact = $("#topContacts");
+//contact.append(HTMLmobile.replace("%data%", bio.contacts.Phone));
+//contact.append(HTMLemail.replace("%data%", bio.contacts.Emailmail));
+//contact.append(HTMLgithub.replace("%data%", bio.contacts.Github));
+//contact.append(HTMLlocation.replace("%data%", bio.contacts.Location));
+
+
+//if (bio.Skills.length !== 0) {
+//    header.append(HTMLskillsStart);
+//    var skills = $("#skills");
+//    for (var i = 0; i < bio.Skills.length; i++) {
+//        skills.append(HTMLskills.replace("%data%", bio.Skills[i]));
+//    }
+//}
+
+//displayWork();
+
+//function displayWork() {
+//    for (var index in work.jobs) {
+//        $("#workExperience").append(HTMLworkStart);
+//        var work_div = $(".work-entry:last");
+//        var employer_title = HTMLworkEmployer.replace("%data%", work.jobs[index].employer) + HTMLworkTitle.replace("%data%", work.jobs[index].title);
+//        work_div.append(employer_title);
+//        work_div.append(HTMLworkDates.replace("%data%", work.jobs[index].dates));
+//        work_div.append(HTMLworkLocation.replace("%data%", work.jobs[index].location));
+//        work_div.append(HTMLworkDescription.replace("%data%", work.jobs[index].description));
+//    }
+//}
+
 
 //
 //$("#education").append(HTMLschoolStart);

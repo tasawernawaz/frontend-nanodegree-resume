@@ -15,7 +15,7 @@
 
 h1 {
   font-size: 40px;
-  color: #F5A623;
+  color: #3EA055;
   line-height: 48px;
   display: inline;
 }
@@ -23,7 +23,7 @@ h1 {
 h2 {
   font-weight: bold;
   font-size: 24px;
-  color: #999999;
+  color: #4AA02C;
   line-height: 29px;
   padding: 10px;
 }
@@ -87,16 +87,16 @@ a {
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  color: #3EA055;
   display: none;
 }
 
 .orange {
-  background-color: #F5AE23;
+  background-color: #3EA055;
 }
 
 .orange-text {
-  color: #F5AE23;
+  color: #3EA055;
 }
 
 .white-text {
@@ -116,7 +116,7 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: #484762;
 }
 
 .flex-box {

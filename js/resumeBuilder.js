@@ -9,8 +9,8 @@ var bio = {
         'location': "Lahore, Pakistan"
     },
     'welcomeMessage': 'Welcome to my resume',
-    'biopic': "images/fry.jpg",
-    'skills': ['Python', 'Scrapy', 'Javascript', 'CSS'],
+    'biopic': "images/me.jpg",
+    'skills': ['Python', 'Django', 'Scrapy', 'Javascript', 'CSS'],
     'display': function () {
         var header = $("#header");
         header.prepend(HTMLheaderRole.replace("%data%", bio.role));

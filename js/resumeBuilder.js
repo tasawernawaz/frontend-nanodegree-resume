@@ -58,6 +58,37 @@ var work = {
     }
 };
 
+
+var projects = {
+    'projects': [
+        {
+            'title': 'kyruus',
+            'dates': "Dec, 2012 - May, 2013",
+            'description': 'data collection of doctors from state boards and hospitals websites',
+            'images': ['images/kyruus-1.png', 'images/kyruus-2.png']
+        },
+        {
+            'title': 'aee',
+            'dates': "May, 2013 - Jan 2015",
+            'description': 'mostly work done ia related to python-scrapy',
+            'images': ['images/aee.png']
+        }
+    ],
+    display: function () {
+        for (var project in projects.projects) {
+            $("#projects").append(HTMLprojectStart);
+            var project_div = $(".project-entry:last");
+            project_div.append(HTMLprojectTitle.replace("%data%", projects.projects[project].title));
+            project_div.append(HTMLprojectDates.replace("%data%", projects.projects[project].dates));
+            project_div.append(HTMLprojectDescription.replace("%data%", projects.projects[project].description));
+            for (var image in projects.projects[project].images) {
+                project_div.append(HTMLprojectImage.replace("%data%", projects.projects[project].images[image]));
+            }
+
+        }
+    }
+};
+
 var education = {
     'schools': [
         {
@@ -77,69 +108,50 @@ var education = {
     ],
     "onlineCourses": [
         {
-            'title': 'Udacity Nanodegree',
+            'title': 'Introduction to jQuery',
             'school': 'Udacity',
             'dates': 2015,
-            'url': 'https://udacity.com/course/nd001'
+            'url': 'https://www.udacity.com/course/viewer#!/c-ud245-nd/l-3342528615/m-3343838767'
+        },
+        {
+            'title': 'Introduction to HTML and CSS',
+            'school': 'Udacity',
+            'dates': 2014,
+            'url': 'https://www.udacity.com/course/viewer#!/c-ud304-nd'
         }
     ],
     'display': function () {
         for (var school in education.schools) {
             $("#education").append(HTMLschoolStart);
             var edu_div = $(".education-entry:last");
-            var name_degree =HTMLschoolName.replace("%data%", education.schools[school].name) + HTMLschoolDegree.replace("%data%", education.schools[school].degree)
+            var name_degree = HTMLschoolName.replace("%data%", education.schools[school].name) + HTMLschoolDegree.replace("%data%", education.schools[school].degree)
             edu_div.append(name_degree);
             edu_div.append(HTMLschoolLocation.replace("%data%", education.schools[school].location));
-            edu_div.append(HTMLschoolMajor.replace("%data%", education.schools[school].major));
             edu_div.append(HTMLschoolDates.replace("%data%", education.schools[school].dates));
+            edu_div.append(HTMLschoolMajor.replace("%data%", education.schools[school].major));
         }
+        edu_div.append(HTMLonlineClasses);
         for (var online_school in education.onlineCourses) {
-            $("#education").append(HTMLonlineClasses);
-            var online_edu_div = $(".education-entry:last");
-            var title_school = HTMLonlineTitle.replace("%data%", education.schools[online_school].title) + HTMLonlineSchool.replace("%data%", education.schools[online_school].school)
-            online_edu_div.append(title_school);
-            online_edu_div.append(HTMLonlineDates.replace("%data%", education.schools[online_school].dates));
-            online_edu_div.append(HTMLonlineURL.replace("%data%", education.schools[online_school].url));
-        }
-    }
-};
-
-
-var projects = {
-    'projects': [
-        {
-            'title': 'kyruus',
-            'dates': "Dec, 2012 - May, 2013",
-            'description': 'data collection of doctors from state boards and hospitals websites',
-            'images': ['images/kyruus.png']
-        },
-        {
-            'title': 'aee',
-            'dates': "May, 2013 - Jan 2015",
-            'description': 'mostly work done ia related to python-scrapy',
-            'images': ['images/aee.png']
-        }
-    ],
-    display: function () {
-        projects.display = function () {
-            for (var index in projects.projects) {
-                $("#projects").append(HTMLprojectStart);
-                var project_div = $(".project-entry:last");
-                project_div.append(HTMLprojectTitle.replace("%data%", projects.projects[index].title));
-                project_div.append(HTMLprojectDates.replace("%data%", projects.projects[index].dates));
-                project_div.append(HTMLprojectDescription.replace("%data%", projects.projects[index].description));
-                project_div.append(HTMLprojectImage.replace("%data%", projects.projects[index].images));
-            }
+            $("#education").append(HTMLschoolStart);
+            edu_div = $(".education-entry:last");
+            var title_school = HTMLonlineTitle.replace("%data%", education.onlineCourses[online_school].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[online_school].school)
+            edu_div.append(title_school);
+            edu_div.append(HTMLonlineDates.replace("%data%", education.onlineCourses[online_school].dates));
+            edu_div.append(HTMLonlineURL.replace("%data%", education.onlineCourses[online_school].url));
         }
     }
 };
 
 
 bio.display();
+projects.display();
 work.display();
 education.display();
-projects.display();
+$("#mapDiv").append(googleMap);
 
+$(document).click(function (loc) {
+   logClicks(loc.pageX, loc.pageY);
+});
 
 //var header = $("#header");
 //var myName = HTMLheaderName.replace("%data%", bio.Name);

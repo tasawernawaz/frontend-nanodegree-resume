@@ -121,8 +121,9 @@ var education = {
         }
     ],
     'display': function () {
+        var parent_edu_div = $("#education");
         for (var school in education.schools) {
-            $("#education").append(HTMLschoolStart);
+            parent_edu_div.append(HTMLschoolStart);
             var edu_div = $(".education-entry:last");
             var name_degree = HTMLschoolName.replace("%data%", education.schools[school].name) + HTMLschoolDegree.replace("%data%", education.schools[school].degree)
             edu_div.append(name_degree);
@@ -130,9 +131,10 @@ var education = {
             edu_div.append(HTMLschoolDates.replace("%data%", education.schools[school].dates));
             edu_div.append(HTMLschoolMajor.replace("%data%", education.schools[school].major));
         }
-        edu_div.append(HTMLonlineClasses);
+
+        parent_edu_div.append(HTMLonlineClasses);
         for (var online_school in education.onlineCourses) {
-            $("#education").append(HTMLschoolStart);
+            parent_edu_div.append(HTMLschoolStart);
             edu_div = $(".education-entry:last");
             var title_school = HTMLonlineTitle.replace("%data%", education.onlineCourses[online_school].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[online_school].school)
             edu_div.append(title_school);
